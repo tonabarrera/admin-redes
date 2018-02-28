@@ -1,0 +1,14 @@
+no disponible solo 5.26 min al año
+disponibilidad de un equipo = MTBF/(MTBF+MTTR)
+MTBF = tiempo medio entre fallos
+MTTR = tiempo medio para de reparacion
+La regla anterior no aplica para todo un sistema
+
+Los servicios de telecomunicaciones se basan en Telcordia (antes Bellcore)
+excluyen factores como perdida de la red, mantenimiento preventivo y cortes de electricidad, por lo que un sistema con cinco nueves podria solo tener 3 o menos
+
+VoIP permite que la disponibilidad dependa de todo el sistema y no de componentes especificos
+
+El primer paso para calcular la disponibilidadde un sistema  es calcular la disponibilidad de cada componente
+
+Disponibilidad de un sistema en serie As = A1 * A2
