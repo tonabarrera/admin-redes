@@ -1,0 +1,3 @@
+Levantar un host
+tftp copia a srv/tftp
+hacer un script que copie de srv/tftp a home y que utilice telnet para realizar el respaldo del enrutador
