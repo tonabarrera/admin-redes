@@ -11,21 +11,25 @@ RUTA = "/home/tona/Documents/sexto/redes3/ping-poller"
 
 
 def crear_base():
-    # RRA:AVERAGE:0.5:1:24
+    # Espera 120 segundos antes de que se guarde como NaN
+    # RRA:AVERAGE:0.5:1:60
     # 0.5 = porcentaje de PDP que pueden ser desconocidos
-    # 5  = PDP que se utilizan, cada actualizacion es un PDP
-    # 48 = Cuantos PDP se guardan
-    # 1 min (60 s) * 5 PDP = 5 min intervalo en el que se guarda un registro de los 48
-    # Toma (5 min * 48 registros) = 240 min =  4 hrs llenar los 48 registros
-    # Por lo que almacenamos 4 horas de info
+    # 1  = PDP que se utilizan, cada actualizacion es un PDP
+    # 60 = Cuantos PDP se guardan
+    # 1 min (60 s) * 1 PDP = 1 min intervalo en el que se guarda un registro de los 60
+    # Toma (1 min * 60 registros) = 60 min llenar los 60 registros
+    # Por lo que almacenamos 60 min de info
     for direccion in DIRECCIONES:
         archivo = "{}/{}.rrd".format(RUTA, direccion)
         if not os.path.isfile(archivo):
             base_rrd = rrd_create(archivo, "--start", "N", "--step", "60",
                                   "DS:tiempo:GAUGE:120:0:U",
-                                  "RRA:MIN:0.5:5:48",
-                                  "RRA:MAX:0.5:5:48",
-                                  "RRA:AVERAGE:0.5:1:48")
+                                  "RRA:MIN:0.5:5:12",
+                                  "RRA:MAX:0.5:5:12",
+                                  "RRA:MIN:0.5:60:24",
+                                  "RRA:MAX:0.5:60:24",
+                                  "RRA:AVERAGE:0.5:1:60",
+                                  "RRA:AVERAGE:0.5:1:1440")
 
 
 def actualizacion():

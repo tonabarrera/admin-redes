@@ -10,8 +10,8 @@ def graficar():
         titulo = "Ping de {}".format(direccion)
         nombre_img = "{}/{}-actual.png".format(RUTA, direccion)
         rrd_graph(nombre_img,
-                  "--vertical-label", "mili seg",
-                  "--start", "-30m",
+                  "--vertical-label", "miliseg",
+                  "--start", "-1h",
                   "--title", titulo,
                   "DEF:mitiempo={}:tiempo:AVERAGE".format(archivo_rrd),
                   "LINE1:mitiempo#FF0000:Tiempo",
@@ -19,16 +19,14 @@ def graficar():
                   "GPRINT:mitiempo:MAX:Máximo\: %.3lf",
                   "GPRINT:mitiempo:MIN:Mínimo\: %.3lf")
 
-        for sched in ['diario', 'semanal']:
-            if sched == 'diario':
-                period = 'd'
-            elif sched == 'semanal':
-                period = 'w'
-            # print("{} - {}".format(direccion, sched))
-            nombre_img = "{}/{}-{}.png".format(RUTA, direccion, sched)
-            titulo = "Registro ping {} de {}".format(sched, direccion)
-            rrd_graph(nombre_img, "--start", "-1{}".format(period),
-                      "--vertical-label=mili seg",
+        for intervalo in ['diario']:
+            if intervalo == 'diario':
+                etiqueta = 'd'
+            # print("{} - {}".format(direccion, intervalo))
+            nombre_img = "{}/{}-{}.png".format(RUTA, direccion, intervalo)
+            titulo = "Registro ping {} de {}".format(intervalo, direccion)
+            rrd_graph(nombre_img, "--start", "-1{}".format(etiqueta),
+                      "--vertical-label=miliseg",
                       "--title", titulo,
                       "DEF:mi_tiempo={}:tiempo:AVERAGE".format(archivo_rrd),
                       "LINE1:mi_tiempo#0000FF:Tiempo",
