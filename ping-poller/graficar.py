@@ -1,7 +1,7 @@
 from rrdtool import graph as rrd_graph
 
 DIRECCIONES = ["github.com", "127.0.0.1", "148.204.58.221"]
-RUTA = "/home/tona/Documents/sexto/redes3/ping-logger"
+RUTA = "/home/tona/Documents/sexto/redes3/ping-poller"
 
 
 def graficar():
@@ -10,7 +10,7 @@ def graficar():
         titulo = "Ping de {}".format(direccion)
         nombre_img = "{}/{}-actual.png".format(RUTA, direccion)
         rrd_graph(nombre_img,
-                  "--vertical-label", "ms",
+                  "--vertical-label", "mili seg",
                   "--start", "-30m",
                   "--title", titulo,
                   "DEF:mitiempo={}:tiempo:AVERAGE".format(archivo_rrd),
@@ -19,18 +19,16 @@ def graficar():
                   "GPRINT:mitiempo:MAX:Máximo\: %.3lf",
                   "GPRINT:mitiempo:MIN:Mínimo\: %.3lf")
 
-        for sched in ['dia', 'semana', 'mes']:
-            if sched == 'dia':
+        for sched in ['diario', 'semanal']:
+            if sched == 'diario':
                 period = 'd'
-            elif sched == 'semana':
+            elif sched == 'semanal':
                 period = 'w'
-            else:
-                period = 'm'
             # print("{} - {}".format(direccion, sched))
             nombre_img = "{}/{}-{}.png".format(RUTA, direccion, sched)
-            titulo = "ping del ultimo {} de {}".format(sched, direccion)
+            titulo = "Registro ping {} de {}".format(sched, direccion)
             rrd_graph(nombre_img, "--start", "-1{}".format(period),
-                      "--vertical-label=Tiempo",
+                      "--vertical-label=mili seg",
                       "--title", titulo,
                       "DEF:mi_tiempo={}:tiempo:AVERAGE".format(archivo_rrd),
                       "LINE1:mi_tiempo#0000FF:Tiempo",

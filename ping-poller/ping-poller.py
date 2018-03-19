@@ -7,7 +7,7 @@ import re
 import os.path
 
 DIRECCIONES = ["github.com", "127.0.0.1", "148.204.58.221"]
-RUTA = "/home/tona/Documents/sexto/redes3/ping-logger"
+RUTA = "/home/tona/Documents/sexto/redes3/ping-poller"
 
 
 def crear_base():
@@ -15,7 +15,7 @@ def crear_base():
     # 0.5 = porcentaje de PDP que pueden ser desconocidos
     # 5  = PDP que se utilizan, cada actualizacion es un PDP
     # 48 = Cuantos PDP se guardan
-    # 1 min * 5 PDP = 5 min intervalo en el que se guarda un registro de los 48
+    # 1 min (60 s) * 5 PDP = 5 min intervalo en el que se guarda un registro de los 48
     # Toma (5 min * 48 registros) = 240 min =  4 hrs llenar los 48 registros
     # Por lo que almacenamos 4 horas de info
     for direccion in DIRECCIONES:
