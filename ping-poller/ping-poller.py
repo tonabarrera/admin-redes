@@ -29,7 +29,7 @@ def crear_base():
                                   "RRA:MIN:0.5:60:24",
                                   "RRA:MAX:0.5:60:24",
                                   "RRA:AVERAGE:0.5:1:60",
-                                  "RRA:AVERAGE:0.5:1:1440")
+                                  "RRA:AVERAGE:0.5:10:144")
 
 
 def actualizacion():
