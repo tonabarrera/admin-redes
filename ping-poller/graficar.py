@@ -15,9 +15,9 @@ def graficar():
                   "--title", titulo,
                   "DEF:mitiempo={}:tiempo:AVERAGE".format(archivo_rrd),
                   "LINE1:mitiempo#FF0000:Tiempo",
-                  "GPRINT:mitiempo:AVERAGE:Promedio\: %.3lf",
-                  "GPRINT:mitiempo:MAX:Máximo\: %.3lf",
-                  "GPRINT:mitiempo:MIN:Mínimo\: %.3lf")
+                  "GPRINT:mitiempo:AVERAGE:Promedio\: %.3lf ms",
+                  "GPRINT:mitiempo:MAX:Max\: %.3lf ms",
+                  "GPRINT:mitiempo:MIN:Min\: %.3lf ms")
 
         for intervalo in ['diario']:
             if intervalo == 'diario':
@@ -30,9 +30,9 @@ def graficar():
                       "--title", titulo,
                       "DEF:mi_tiempo={}:tiempo:AVERAGE".format(archivo_rrd),
                       "LINE1:mi_tiempo#0000FF:Tiempo",
-                      "GPRINT:mi_tiempo:AVERAGE:Promedio\:0 %.2lf ",
-                      "GPRINT:mi_tiempo:MAX: Máximo\: %.2lf",
-                      "GPRINT:mi_tiempo:MIN:Mínimo\: %.2lf")
+                      "GPRINT:mi_tiempo:AVERAGE:Promedio\: %.2lf ms",
+                      "GPRINT:mi_tiempo:MAX:Max\: %.2lf ms",
+                      "GPRINT:mi_tiempo:MIN:Min\: %.2lf ms")
 
 
 graficar()
