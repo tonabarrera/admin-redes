@@ -1,0 +1,3 @@
+http://blog.hermione.de/?p=67
+http://148.204.57.203/administracionOffline/rrd/OJO/HERmione%20%C2%BB%20Blog%20Archive%20%C2%BB%20RRDTools%20%E2%80%93%20Least%20Square%20Lines.html
+http://hints.jeb.be/2009/12/04/trend-prediction-with-rrdtool/
