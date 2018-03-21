@@ -1,0 +1,3 @@
+http://rcp100.sourceforge.net/ospf3net.html
+http://rcp100.sourceforge.net/rip.html
+http://www.mauriciomatamala.net/PAR/red-jerarquica.php
