@@ -1,0 +1,17 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+
+spawn ./pregunta.sh
+
+expect "Hola, ¿Quien eres?"
+
+send -- "Soy tona\r"
+
+expect "¿Te puedo hacer unas preguntas?"
+send -- "Claro\r"
+
+expect "¿Cual es tu pelicula favorita?"
+send -- "El señor de los anillos\r"
+
+expect eof
