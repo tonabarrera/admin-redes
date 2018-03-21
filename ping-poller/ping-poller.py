@@ -1,6 +1,7 @@
 from rrdtool import create as rrd_create
 from rrdtool import update as rrd_update
 from rrdtool import fetch as rrd_fetch
+from rrdtool import graph as rrd_graph
 import subprocess
 import sys
 import re
@@ -34,6 +35,37 @@ def crear_base():
                                   "RRA:MAX:0.5:60:24",
                                   "RRA:AVERAGE:0.5:1:60",
                                   "RRA:AVERAGE:0.5:10:144")
+
+
+def graficar():
+    for direccion in DIRECCIONES:
+        archivo_rrd = "{}/{}.rrd".format(RUTA, direccion)
+        titulo = "Ping de {}".format(direccion)
+        nombre_img = "{}/{}-actual.png".format(RUTA, direccion)
+        rrd_graph(nombre_img,
+                  "--vertical-label", "miliseg",
+                  "--start", "-1h",
+                  "--title", titulo,
+                  "DEF:mitiempo={}:tiempo:AVERAGE".format(archivo_rrd),
+                  "LINE1:mitiempo#FF0000:Tiempo",
+                  "GPRINT:mitiempo:AVERAGE:Promedio\: %.3lf ms",
+                  "GPRINT:mitiempo:MAX:Max\: %.3lf ms",
+                  "GPRINT:mitiempo:MIN:Min\: %.3lf ms")
+
+        for intervalo in ['diario']:
+            if intervalo == 'diario':
+                etiqueta = 'd'
+            # print("{} - {}".format(direccion, intervalo))
+            nombre_img = "{}/{}-{}.png".format(RUTA, direccion, intervalo)
+            titulo = "Registro ping {} de {}".format(intervalo, direccion)
+            rrd_graph(nombre_img, "--start", "-1{}".format(etiqueta),
+                      "--vertical-label=miliseg",
+                      "--title", titulo,
+                      "DEF:mi_tiempo={}:tiempo:AVERAGE".format(archivo_rrd),
+                      "LINE1:mi_tiempo#0000FF:Tiempo",
+                      "GPRINT:mi_tiempo:AVERAGE:Promedio\: %.2lf ms",
+                      "GPRINT:mi_tiempo:MAX:Max\: %.2lf ms",
+                      "GPRINT:mi_tiempo:MIN:Min\: %.2lf ms")
 
 
 def enviar_email(direccion):
@@ -77,3 +109,4 @@ def actualizacion():
 
 crear_base()
 actualizacion()
+graficar()
