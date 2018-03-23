@@ -1,0 +1,56 @@
+hostname rcp
+!
+service telnet
+service http encrypted password TDEFTPRL$19cfe4f04945d4920483bb5409d387a4
+!
+administrator rcp encrypted password VAGTGYPT$6eUYZUY46haXKrFsAzQWJ1
+!
+!
+!
+!
+router ospf
+  router-id 192.168.232.10
+  network 192.168.232.4/30 area 0
+  network 192.168.232.8/30 area 0
+  network 192.168.203.0/24 area 0
+!
+interface loopback lo
+  ip address 127.0.0.1/8
+  ip mtu 16436
+!
+interface ethernet eth0
+  ip address 192.168.203.15/24
+  ip mtu 1500
+  no shutdown
+!
+interface ethernet eth1
+  ip address 192.168.232.6/30
+  ip mtu 1500
+  no shutdown
+!
+interface ethernet eth2
+  ip address 192.168.232.10/30
+  ip mtu 1500
+  no shutdown
+!
+interface ethernet eth3
+  ip address 10.0.1.253/24
+  ip mtu 1500
+  no shutdown
+!
+interface ethernet eth4
+  ip mtu 1500
+  shutdown
+!
+interface ethernet eth5
+  ip mtu 1500
+  shutdown
+!
+interface ethernet eth6
+  ip mtu 1500
+  shutdown
+!
+interface ethernet eth7
+  ip mtu 1500
+  shutdown
+!

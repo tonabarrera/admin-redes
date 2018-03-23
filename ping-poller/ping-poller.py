@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from rrdtool import create as rrd_create
 from rrdtool import update as rrd_update
 from rrdtool import fetch as rrd_fetch
@@ -16,6 +17,8 @@ RUTA = "/home/tona/Documents/sexto/redes3/ping-poller"
 
 
 def crear_base():
+    """Funcion que crea la base si no existe de acuerdo a la lista
+    de host que se tiene declarada"""
     # Espera 120 segundos antes de que se guarde como NaN
     # RRA:AVERAGE:0.5:1:60
     # 0.5 = porcentaje de PDP que pueden ser desconocidos
@@ -38,6 +41,8 @@ def crear_base():
 
 
 def graficar():
+    """Funcion que toma los valores que hay en la base y los grafica
+    en un intervalo del ultimo dia y ultima hora"""
     for direccion in DIRECCIONES:
         archivo_rrd = "{}/{}.rrd".format(RUTA, direccion)
         titulo = "Ping de {}".format(direccion)
@@ -69,6 +74,9 @@ def graficar():
 
 
 def enviar_email(direccion):
+    """Funcion que recibe como parametro la direccion del host
+    que no respondio a un ping y que se envia por correo electronico,
+    los parametros del email son pasados al script al ejecutarlo"""
     email = MIMEMultipart()
     # email['From'] = "tonatihubarrera@outlook.com"
     email['From'] = sys.argv[1]
@@ -84,13 +92,16 @@ def enviar_email(direccion):
         server.login(email['From'], contra)
         server.sendmail(email['From'], email['To'], email.as_string())
         server.quit()
-        print("Email enviado")
+        # print("Email enviado")
     except SMTPException as e:
-        print("Algo fallo al enviar el email")
-        print(e)
+        pass
+        # print("Algo fallo al enviar el email")
+        # print(e)
 
 
 def actualizacion():
+    """Funcion que cada cierto tiempo acutaliza la informacion
+    de rrd despues de realizar un ping"""
     for direccion in DIRECCIONES:
         lista = ["ping", direccion, "-c", "1"]
         try:
@@ -102,8 +113,8 @@ def actualizacion():
             archivo = "{}/{}.rrd".format(RUTA, direccion)
             rrd_update(archivo, "N:{}".format(dato))
         except Exception as e:
-            print("Error al hacer ping")
-            print(e)
+            # print("Error al hacer ping")
+            # print(e)
             enviar_email(direccion)
 
 
