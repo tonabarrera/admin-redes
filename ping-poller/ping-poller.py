@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 from rrdtool import create as rrd_create
 from rrdtool import update as rrd_update
 from rrdtool import fetch as rrd_fetch
@@ -13,7 +13,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 DIRECCIONES = ["github.com", "127.0.0.1", "148.204.58.221"]
-RUTA = "/home/tona/Documents/sexto/redes3/ping-poller"
+RUTA = "/home/tona/Documents/sexto/admin-redes/ping-poller"
 
 
 def crear_base():

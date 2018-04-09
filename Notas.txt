@@ -1,0 +1,3 @@
+para la parte de inventario se deberia de mandar un snmpwalk para saber los componentes de cada enrutador
+la plantilla es justificar el porqué utilice algun protocolo en especifico
+para el analisis historico solo guardar las cosas que pueda consultar
