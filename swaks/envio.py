@@ -18,7 +18,7 @@ def enviar_email(direccion):
     try:
         server = smtplib.SMTP("smtp-mail.outlook.com", 587)
         server.starttls()
-        server.login("tonatihubarrera@outlook.com", "N3gastupadr3.90")
+        server.login("tonatihubarrera@outlook.com", "")
         server.sendmail(msg['From'], msg['To'], msg.as_string())
         server.quit()
         print("Successfully sent email")
