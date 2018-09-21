@@ -47,3 +47,5 @@ def actualizacion():
             enviar_email(direccion)
 
 actualizacion()
+
+#swaks --to "carlostonatihu@gmail.com" --from "tonatihubarrera@outlook.com" -s smtp-mail.outlook.com:587 -tls -a --auth LOGIN --auth-user "tonatihubarrera@outlook.com" --auth-password "" --data "Date: %DATE%\nTo: %TO_ADDRESS%\nFrom: %FROM_ADDRESS%\nSubject: Titulo par tu email\nX-Mailer: swaks v$p_versionjetmore.org/john/code/swaks/\n%NEW_HEADERS%\n Mensaje que quieran enviar en tu correo \n"
