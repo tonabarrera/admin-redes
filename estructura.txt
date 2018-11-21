@@ -1,0 +1,8 @@
+dos servidores (busybox?)
+dos balanceadores (haproxy y keepalive)
+uno o dos switch
+dos routers (rcp)
+dos routers (rcp)
+uno o dos switchs
+un host y otras vpc
+Y en alguna parte el gestor (apache?), backup

@@ -1,6 +1,7 @@
 #!/bin/bash
 #script.sh
-direccion=127.0.0.1
+direccion=$@
+echo $direccion
 variable=$(date +%y/%m/%d-%H:%M:%S)
 tiempo=$(ping $direccion -c 1 | awk -F'time=' '/time=/ {print $2}' | awk -F' ' '{print $1}')
 base=/home/tonatihu/Documents/$direccion.rrd
@@ -14,7 +15,6 @@ else
     echo "Existe"
 fi
 rrdtool update $base N:$tiempo
-echo $tiempo
 limite=35
 # retorna 1 si res es mayor que limite
 # cero en otro caso
