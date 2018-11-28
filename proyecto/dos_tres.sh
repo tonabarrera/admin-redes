@@ -4,7 +4,7 @@
 # A2  No ha respondido al ping más de 20 segundos A2; IP; falla en ping
 # A3  Retardo en respuesta del ping mayor a 5 segundos    A3; IP; retardo en ping
 direccion=$@
-limite=5000
+LIMITE=5000 # Tiempo limite en milisegundos
 base=/home/tonatihu/Documents/$direccion.rrd
 # variable=$(date +%y/%m/%d-%H:%M:%S)
 
@@ -31,7 +31,7 @@ numCompare() {
    echo "$me"
 }
 
-eva=$(numCompare $limite $tiempo)
+eva=$(numCompare $LIMITE $tiempo)
 
 # Para A3
 if [[ eva -eq 1 ]]; then
