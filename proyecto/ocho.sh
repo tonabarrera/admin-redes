@@ -4,6 +4,7 @@ direccion=$1
 LIMITE=0.8
 disponible=$(snmpget -v 1 -c public -OQUv $direccion 1.3.6.1.4.1.2021.4.6.0)
 total=$(snmpget -v 1 -c public -OQUv $direccion 1.3.6.1.4.1.2021.4.5.0)
+# Porcentaje de memoria disponible
 porcentaje=$(echo "scale=2; $disponible/$total" | bc -l)
 
 numCompare() {
