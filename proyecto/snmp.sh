@@ -10,5 +10,5 @@
 #snmpwalk -v 1 -c public localhost 1.3.6.1.2.1.2.2.1.16
 # 1-3 ifspeed
 #snmpwalk -v 1 -c public localhost 1.3.6.1.2.1.2.2.1.5 
-#
+# -v 2c
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.4.6

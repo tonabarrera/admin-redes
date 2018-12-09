@@ -1,29 +1,34 @@
 #!/bin/bash
 # cuatro.sh
 # A4 El tiempo de respuesta del servidor web excede 10 segundos
-direccion=$@
-LIMITE=10 # Los diez segundos
-# Respuesta en segundos
-tiempo=$(curl -s -w %{time_total}\\n -o /dev/null $direccion)
+direcciones=('github.com')
+LIMITE=.1 # Los diez segundos
 
-numCompare() {
-   local me=$(awk -v lim="$1" -v res="$2" 'BEGIN { printf (res>lim?"1":"0") }')
+# Retorna 1 si valor es mayor a limite
+comparacion() {
+   local me=$(awk -v lim="$1" -v valor="$2" 'BEGIN { printf (valor>lim?1:0) }')
    echo "$me"
 }
 
-eva=$(numCompare $LIMITE $tiempo)
+for direccion in ${direcciones[@]}; do
+    # Respuesta en segundos
+    tiempo=$(curl -s -w %{time_total}\\n -o /dev/null $direccion)
+    eva=$(comparacion $LIMITE $tiempo)
 
-if [[ eva -eq 1 ]]; then
-    swaks --to "carlostonatihu@gmail.com" \
-    --from "tonatihubarrera@outlook.com" \
-    -s smtp-mail.outlook.com:587 -tls -a --auth LOGIN \
-    --auth-user "tonatihubarrera@outlook.com" \
-    --auth-password "CONTRA" \
-    --data "Date: %DATE% \n
-    To: %TO_ADDRESS% \n
-    From: %FROM_ADDRESS% \n
-    Subject: A4; $direccion; retardo http \n
-    X-Mailer: swaks v$p_versionjetmore.org/john/code/swaks/ \n
-    %NEW_HEADERS% \n
-    El tiempo de respuesta del servidor web excede 10 segundos \n"
-fi
+    echo $tiempo
+
+    if [ $eva -eq 1 ]; then
+        echo "MAYOR"
+            swaks --to "carlostonatihu@gmail.com" \
+            --from "tonatihubarrera@outlook.com" \
+            -s smtp-mail.outlook.com:587 -tls -a --auth LOGIN \
+            --auth-user "tonatihubarrera@outlook.com" \
+            --auth-password "N3gastupadr3.90" \
+            --data "Date: %DATE% \nTo: %TO_ADDRESS% \nFrom: %FROM_ADDRESS% 
+        \nSubject: A4; $direccion; retardo http 
+        \nX-Mailer: swaks v20181104 jetmore.org/john/code/swaks/
+        \n%NEW_HEADERS%\n"
+    else
+        echo "MENOR"
+    fi
+done

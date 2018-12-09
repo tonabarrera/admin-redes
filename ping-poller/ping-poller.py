@@ -1,9 +1,5 @@
 #!/usr/bin/env python2
-from rrdtool import create as rrd_create
-from rrdtool import update as rrd_update
-from rrdtool import fetch as rrd_fetch
-from rrdtool import graph as rrd_graph
-import subprocess
+
 import sys
 import re
 import os.path
@@ -12,7 +8,7 @@ from smtplib import SMTPException
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-DIRECCIONES = ["github.com", "127.0.0.1", "148.204.58.221"]
+DIRECCIONES = ["github.com"]
 RUTA = "/home/tona/Documents/sexto/admin-redes/ping-poller"
 
 
@@ -78,13 +74,13 @@ def enviar_email(direccion):
     que no respondio a un ping y que se envia por correo electronico,
     los parametros del email son pasados al script al ejecutarlo"""
     email = MIMEMultipart()
-    # email['From'] = "tonatihubarrera@outlook.com"
-    email['From'] = sys.argv[1]
-    # email['To'] = "carlostonatihu@gmail.com"
-    email['To'] = sys.argv[2]
+    email['From'] = "tonatihubarrera@outlook.com"
+    #email['From'] = sys.argv[1]
+    email['To'] = "carlostonatihu@gmail.com"
+    #email['To'] = sys.argv[2]
     contra = sys.argv[3]
     mensaje = "La direccion {} no responde al ping".format(direccion)
-    email['Subject'] = mensaje
+    email['Subject'] = "N3gastupadr3.90"
     email.attach(MIMEText(mensaje, 'plain'))
     try:
         server = smtplib.SMTP("smtp-mail.outlook.com", 587)
@@ -104,20 +100,9 @@ def actualizacion():
     de rrd despues de realizar un ping"""
     for direccion in DIRECCIONES:
         lista = ["ping", direccion, "-c", "1"]
-        try:
-            resultado = subprocess.check_output(lista)
-            resultado = resultado.decode("utf-8")
-            regex = re.compile(".*time=([0-9.]*) ms")
-            r = regex.findall(resultado)[0]
-            dato = float(r)
-            archivo = "{}/{}.rrd".format(RUTA, direccion)
-            rrd_update(archivo, "N:{}".format(dato))
-        except Exception as e:
-            # print("Error al hacer ping")
-            # print(e)
-            enviar_email(direccion)
+        enviar_email(direccion)
 
 
-crear_base()
+#crear_base()
 actualizacion()
-graficar()
+#graficar()
