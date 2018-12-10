@@ -1,7 +1,7 @@
 #!/bin/bash
 # tres.sh
 # A3  Retardo en respuesta del ping mayor a 5 segundos    A3; IP; retardo en ping
-direcciones=('github.com')
+direcciones=('github.com' "localhost")
 LIMITE=65 # Tiempo limite en milisegundos
 
  # retorna 1 si valor es mayor que limite
@@ -11,10 +11,20 @@ comparacion() {
 }
 
 # variable=$(date +%y/%m/%d-%H:%M:%S)
+while true; do
 for direccion in ${direcciones[@]}; do
+    base=./rrd/$direccion.rrd
+    if [ ! -f $base ]; then
+        rrdtool create $base  --step 5 \
+        DS:tiempo:GAUGE:21:U:U \
+        RRA:AVERAGE:0.5:1:120
+    else
+        echo "EXISTE $direccion"
+    fi
+
     tiempo=$(ping $direccion -c 1 | awk -F'time=' '/time=/ {print $2}' | awk -F' ' '{print $1}')
     echo $tiempo
-
+    rrdtool update $base N:$tiempo
     eva=$(comparacion $LIMITE $tiempo)
 
     # Para A3
@@ -32,4 +42,6 @@ for direccion in ${direcciones[@]}; do
     else
         echo "No hay retardo"
     fi
+done
+    sleep 5
 done
