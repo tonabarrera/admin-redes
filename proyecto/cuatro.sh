@@ -1,7 +1,7 @@
 #!/bin/bash
 # cuatro.sh
 # A4 El tiempo de respuesta del servidor web excede 10 segundos
-direcciones=('github.com')
+direcciones="localhost"
 LIMITE=.1 # Los diez segundos
 
 # Retorna 1 si valor es mayor a limite
@@ -10,7 +10,7 @@ comparacion() {
    echo "$me"
 }
 
-for direccion in ${direcciones[@]}; do
+for direccion in $direcciones; do
     # Respuesta en segundos
     tiempo=$(curl -s -w %{time_total}\\n -o /dev/null $direccion)
     eva=$(comparacion $LIMITE $tiempo)

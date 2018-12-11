@@ -1,9 +1,10 @@
 #!/bin/bash
 # seis.sh
 # A6 No se puede administrar via snmp
-direcciones=("127.0.0.1")
-for direccion in ${direcciones[@]}; do
-    archivo_temporal="snmp-$direccion.txt"
+direcciones="127.0.0.1"
+directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+for direccion in $direcciones; do
+    archivo_temporal="$directorio/snmp-$direccion.txt"
     snmpwalk -v 1 -c public $direccion sysDescr.0 > $archivo_temporal 2>&1
     if grep -q "Timeout" $archivo_temporal; then
         echo "MAL"

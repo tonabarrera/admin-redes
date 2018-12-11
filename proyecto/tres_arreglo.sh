@@ -21,8 +21,8 @@ while true; do
         # Si no existe creala
         if [ ! -f $base ]; then
             rrdtool create $base  --step 5 \
-            DS:tiempo:GAUGE:21:U:U \
-            RRA:AVERAGE:0.5:1:120
+            DS:tiempo:GAUGE:10:U:U \
+            RRA:AVERAGE:0.5:1:720
         else
             echo "EXISTE $ip"
         fi
