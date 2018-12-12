@@ -2,9 +2,9 @@
 # monitoreo.sh
 # script para el monitoreo de varias IP
 # Lista de direcciones IP a monitorerar separadas por un espacio
-direcciones="localhost 127.0.0.1"
+direcciones="10.0.1.254"
 # directorio donde se guardan los archivos que se generen
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 # comunidad snmp
 comunidad=public
 
@@ -23,7 +23,7 @@ for direccion in $direcciones; do
         RRA:AVERAGE:0.5:1:60
     fi
     # comandos snmp y oids a consultar
-    cpu_usado=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.2.1.25.3.3.1.2.196608)
+    cpu_usado=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.2.1.25.3.3.1.2.768)
     memoria_disponible=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.4.1.2021.4.6.0)
     memoria_total=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.4.1.2021.4.5.0)
     # porcentaje de memoria usado

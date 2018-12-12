@@ -2,13 +2,13 @@
 # uno.sh
 # A1 la utilización del CPU excede del 60%
 # Lista de direcciones IP a monitorear separadas por un espacio
-direcciones="localhost"
+direcciones="10.0.1.154"
 # limite a utilizar
 LIMITE=60
 # comunidad snmp
 comunidad=public
 # directorio donde se guardan los archivos que se generen
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 
 # Funcion de comparacion, retorna 1 si valor es mayor a limite
 comparacion() {
@@ -29,11 +29,9 @@ for direccion in $direcciones; do
         # Se registra la incidencia en el directorio y en el archivo incidencias
         echo "A1;$direccion;utilizacion CPU;$fecha" >> $directorio/incidencias.log
     # Codigo para enviar un correo
-    #     perl swaks --to "carlostonatihu@gmail.com" \
-    #     --from "tonatihubarrera@outlook.com" \
-    #     -s smtp-mail.outlook.com:587 -tls -a --auth LOGIN \
-    #     --auth-user "tonatihubarrera@outlook.com" \
-    #     --auth-password "" \
+    #     perl swaks --to "destino@gestor.com" \
+    #     --from "soporte@gestor.com" \
+    #     -s 10.0.1.11:1025 \
     #     --data "Date: %DATE% \nTo: %TO_ADDRESS% \nFrom: %FROM_ADDRESS% 
     # \nSubject: A1; $direccion; utilizacion CPU 
     # \nX-Mailer: swaks v20181104 jetmore.org/john/code/swaks/

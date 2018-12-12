@@ -1,5 +1,5 @@
 [General]
-kile_livePreviewEnabled=true
+kile_livePreviewEnabled=false
 kile_livePreviewStatusUserSpecified=true
 kile_livePreviewTool=LivePreview-PDFLaTeX
 lastDocument=documentacion.tex
@@ -23,7 +23,7 @@ order=0
 
 [view-settings,view=0,item:documentacion.tex]
 CursorColumn=31
-CursorLine=81
+CursorLine=16
 JumpList=
 TextFolding=[]
-ViMarks=.,81,32,[,79,1,],81,32
+ViMarks=.,93,452,[,93,433,],93,452

@@ -2,13 +2,13 @@
 # ocho.sh
 # A8 la memoria real es menor de 80% del total
 # Lista de direcciones IP a monitorerar separadas por un espacio
-direcciones="localhost"
+direcciones="10.0.1.254"
 # limite a utilizar
 LIMITE=0.8
 # comunidad snmp
 comunidad=public
 # directorio donde se guardan los archivos que se generen
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 
 # Funcion de comparacion, retorna 1 si valor es menor a limite
 comparacion() {
@@ -18,9 +18,9 @@ comparacion() {
 
 for direccion in $direcciones; do
     # Consulta de memoria disponible
-    disponible=$(snmpget -v 1 -c public -OQUv $direccion 1.3.6.1.4.1.2021.4.6.0)
+    disponible=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.4.1.2021.4.6.0)
     # Consulta de memoria total
-    total=$(snmpget -v 1 -c public -OQUv $direccion 1.3.6.1.4.1.2021.4.5.0)
+    total=$(snmpget -v 1 -c $comunidad -OQUv $direccion 1.3.6.1.4.1.2021.4.5.0)
     # Porcentaje de memoria disponible
     porcentaje=$(echo "scale=2; $disponible/$total" | bc -l)
     #echo "disponible $disponible total $total poercentaje $porcentaje"

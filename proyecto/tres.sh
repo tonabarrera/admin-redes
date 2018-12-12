@@ -2,11 +2,11 @@
 # tres.sh
 # A3  Retardo en respuesta del ping mayor a 5 segundos    A3; IP; retardo en ping
 # Lista de direcciones IP a monitorear separadas por un espacio
-direcciones="localhost"
+direcciones="10.0.1.254"
  # Tiempo limite en milisegundos
 LIMITE=5000
 # directorio donde se guardan los archivos que se generen
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 
  # retorna 1 si valor es mayor que limite
 comparacion() {

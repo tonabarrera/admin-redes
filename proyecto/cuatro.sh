@@ -2,11 +2,11 @@
 # cuatro.sh
 # A4 El tiempo de respuesta del servidor web excede 10 segundos
 # Lista de direcciones IP a monitorear separadas por un espacio
-direcciones="localhost"
+direcciones="10.0.1.254"
  # Tiempo limite en segundos
 LIMITE=10
 # directorio donde se guardan los archivos que se generen
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 
 # Retorna 1 si valor es mayor a limite
 comparacion() {

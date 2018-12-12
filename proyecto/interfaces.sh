@@ -1,14 +1,14 @@
 #!/bin/bash
 # interfaces.sh
 # Direcciones ip a monitorear
-direcciones="127.0.0.1"
+direcciones="10.0.1.254"
 # Directorio donde se guardan los archivos
-directorio=/home/tonatihu/Documents/septimo/admin-redes/proyecto
+directorio=/home/tc/gestor
 # Comunidad snmp
 comunidad=public
 for direccion in $direcciones; do
     # num_interfaces=$(snmpwalk -v 1 -c public $direccion ifIndex | awk 'END{print NR}')
-    for i in 1 2 3; do
+    for i in 1 2 3 4 5; do
         # Si no existe se crea un subdirectorio para la ip monitorear
         subdirectorio="$directorio/$direccion"
         if [ ! -d $subdirectorio ]; then
