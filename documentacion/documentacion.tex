@@ -1,0 +1,91 @@
+% !TeX spellcheck = es_ES
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    morekeywords={let, function},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+%opening
+\title{}
+\title{Documentación del proyecto}
+\author{Barrera Pérez Carlos Tonatihu \\ Profesor: Eduardo Gutiérrez Aldana \\ Administración de servicios en red \\ Grupo: 4CM2 }
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Descripción del proyecto}
+El proyecto consiste de una topología de red en la cual se presentan enrutadores, switches, servidores, gestor y clientes. Los enrutadores y servidor son monitoreados por el gestor con el objetivo de llevar un registro de los datos que estos presentan y poder detectar fallas en los equipos.
+
+\subsection{Herramientas utilizadas}
+El proyecto fue desarrollado en el ambiente de simulación \emph{GNS3} que se encuentra integrado dentro del sistema operativo \emph{Live Raizo - Linux for Virtual SysAdmin} en su versión \emph{8.17.08.30p} (\url{https://sourceforge.net/projects/live-raizo/files/}) ya que es la ultima versión que incluye \emph{Virtual Box} que se utilizo para trabajar con las maquinas virtuales que se trabaron.
+
+Para poder trabajar de forma adecuada se adecuo una USB a modo de arranque con \emph{Raizo} y para evitar la perdida del trabajo y guardar los datos que se encuentran en \textbf{/home} y \textbf{/opt} se creo una partición en el disco duro de la computadora de trabajo. Esta partición se formateo como \textbf{ext4} y se le etiqueto como \textbf{persistence} y se le agrego un archivo llamado \textbf{persistence.conf} con la siguiente información.
+
+\begin{lstlisting}[language=bash]
+ /home
+ /opt union
+ /root union
+\end{lstlisting}
+
+Es importante mencionar que este método de crear persistencia se puede realizar sobre una USB y tener una USB para el boot y otra para la persistencia o ambas características en una sola USB.
+
+En el DVD que se entregó se encuentran las carpetas \textbf{home}, \textbf{opt} con las maquinas virtuales que se trabajaron y el archivo \textbf{persistence.conf}.
+
+De manera general otras herramientas que se utilizaron fueron \href{http://rcp100.sourceforge.net/}{RCP100} y \href{https://distro.ibiblio.org/tinycorelinux/}{TinyCore} como maquinas virtuales para los enrutadores, el gestor y el servidor.
+
+\section{Desarrollo}
+\subsection{Servidor}
+El servidor web fue implementado en \emph{Tiny Core} utilizando el paquete \emph{Busybox HTTPD}, el codigo que se encarga de esto se encuentra en el archivo \textbf{/opt/bootlocal.sh} para que cada vez que se encienda la computadora el servidor comience a trabajar. El código es el siguiente.
+
+\begin{lstlisting}[language=bash]
+ /usr/local/httpd/sbin/httpd -p 80 -h /home/tc/site
+\end{lstlisting}
+Lo que hace este código es activar el servicio de HTTP proporcionado por \emph{Busybox} en el puerto 80 indicando que la página a mostrar (index.html) se encuentra en la carpeta \textbf{/home/tc/site}.
+Además, se debe de configurar una interfaz de la maquina virtual para que se pueda acceder al servidor.
+\subsection{Enrutador}
+Para el enrutador se utilizo RCP100, en cada uno de los enrutadores se configuraron las interfaces y el enrutamiento dinámico OSPF. Además de configurar el agente snmp necesario para llevar a cabo el monitoreo de interfaces, memoria y uso de CPU, esta configuración se realizo de la siguiente forma.
+\begin{lstlisting}[language=bash]
+ snmp-server contact TalesDeMileto
+ snmp-server location Topolovampo
+ snmp-server community soporte ro
+\end{lstlisting}
+\subsection{Gestor}
+\subsubsection{Ping}
+\begin{lstlisting}[language=bash]
+ echo "Hola"
+\end{lstlisting}
+
+
+\end{document}
