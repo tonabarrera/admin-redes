@@ -22,8 +22,8 @@ open=true
 order=0
 
 [view-settings,view=0,item:documentacion.tex]
-CursorColumn=31
-CursorLine=16
+CursorColumn=33
+CursorLine=73
 JumpList=
 TextFolding=[]
-ViMarks=.,93,452,[,93,433,],93,452
+ViMarks=.,72,37,[,72,37,],72,37

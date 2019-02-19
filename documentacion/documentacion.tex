@@ -1,7 +1,10 @@
 % !TeX spellcheck = es_ES
-\documentclass[a4paper,12pt]{article}
+\documentclass[12pt, titlepage]{article}
+\usepackage[letterpaper, margin=3cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{hyperref}
@@ -32,7 +35,6 @@
 }
  
 \lstset{style=mystyle}
-
 %opening
 \title{}
 \title{Documentación del proyecto}
@@ -63,8 +65,17 @@ Es importante mencionar que este método de crear persistencia se puede realizar
 En el DVD que se entregó se encuentran las carpetas \textbf{home}, \textbf{opt} con las maquinas virtuales que se trabajaron y el archivo \textbf{persistence.conf}.
 
 De manera general otras herramientas que se utilizaron fueron \href{http://rcp100.sourceforge.net/}{RCP100} y \href{https://distro.ibiblio.org/tinycorelinux/}{TinyCore} como maquinas virtuales para los enrutadores, el gestor y el servidor.
-
+\newpage
 \section{Desarrollo}
+La topología en la que se trabajo fue la siguiente.
+\begin{figure}[H]
+\begin{center}
+ \includegraphics[width=15cm, height=8cm]{./entrega.png}
+ \caption{Topología del proyecto}
+ \label{fig:3318-paridad}
+\end{center}
+\end{figure}
+La descripción de cada elemento se muestra a continuación.
 \subsection{Servidor}
 El servidor web fue implementado en \emph{Tiny Core} utilizando el paquete \emph{Busybox HTTPD}, el codigo que se encarga de esto se encuentra en el archivo \textbf{/opt/bootlocal.sh} para que cada vez que se encienda la computadora el servidor comience a trabajar. El código es el siguiente.
 
@@ -92,6 +103,28 @@ El gestor fue implementado en una maquina virtual con Tiny Core la cual es una d
 \end{itemize}
 
 Todos los scripts que se utilizan para el monitoreo están elaborados en bash ya que es un lenguaje de scripting que se encuentra en muchas distribuciones de linux. Todos los scripts se ejecutan cada segundo como un demonio gracias al uso de crontab y para poder tener un control de todos los elementos que se gestionan se crea una carpeta por cada IP a monitorear y dentro de cada carpeta se crean los respectivos archivos de RRDtool para guardar datos.
+
+El archivo de configuración de cron que se utilizo fue el siguiente.
+\begin{lstlisting}[language=bash]
+ #!/bin/bash
+ # CRON
+ * * * * * sh /home/tc/gestor/cuatro.sh
+ * * * * * sh /home/tc/gestor/interfaces.sh
+ * * * * * sh /home/tc/gestor/monitoreo.sh
+ * * * * * sh /home/tc/gestor/ocho.sh
+ * * * * * sh /home/tc/gestor/tres.sh
+\end{lstlisting}
+
+Y para lograr que cron se ejecute al encender la maquina virtual se agrega la siguiente linea de código al archivo \textbf{/opt/bootlocal.sh}.
+\begin{lstlisting}[language=bash]
+ crond -L /dev/null 2>&1
+\end{lstlisting}
+
+Ya que Tiny Core no guarda la carpeta donde se encuentra el archivo de configuración de cron se ejecuta el siguiente comando para que se agregue a la lista de carpetas que tienen persistencia, este paso solo se ejecuta una vez.
+\begin{lstlisting}[language=bash]
+ echo var/spool/cron >> /opt/.filetool.lst
+\end{lstlisting}
+
 
 \subsubsection{Utilización CPU}
 El siguiente scripts es el encargado de determinar si se presenta una incidencia por exceso en el uso de CPU, los variables que se utilizan para cambiar su comportamiento son la lista de direcciones IP a monitorear, para el proyecto se especifico una por enrutador, el limite que se va a tolerar, la comunidad SNMP a la cual pertenece el agente, el directorio del archivo de incidencias en donde se registran los problemas que ocurren.

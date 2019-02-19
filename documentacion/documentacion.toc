@@ -1,13 +1,13 @@
 \babel@toc {spanish}{}
-\contentsline {section}{\numberline {1}Descripci\IeC {\'o}n del proyecto}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Herramientas utilizadas}{3}{subsection.1.1}
+\contentsline {section}{\numberline {1}Descripci\IeC {\'o}n del proyecto}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Herramientas utilizadas}{2}{subsection.1.1}
 \contentsline {section}{\numberline {2}Desarrollo}{3}{section.2}
 \contentsline {subsection}{\numberline {2.1}Servidor}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Enrutador}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Enrutador}{3}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Gestor}{4}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}Utilizaci\IeC {\'o}n CPU}{5}{subsubsection.2.3.1}
 \contentsline {subsubsection}{\numberline {2.3.2}Retardo en respuesta del ping}{6}{subsubsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.3}Tiempo de respuesta del servidor}{8}{subsubsection.2.3.3}
-\contentsline {subsubsection}{\numberline {2.3.4}Memoria real}{9}{subsubsection.2.3.4}
+\contentsline {subsubsection}{\numberline {2.3.3}Tiempo de respuesta del servidor}{7}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}Memoria real}{8}{subsubsection.2.3.4}
 \contentsline {subsubsection}{\numberline {2.3.5}Monitoreo de CPU y memoria}{10}{subsubsection.2.3.5}
 \contentsline {subsubsection}{\numberline {2.3.6}Monitoreo de interfaces}{11}{subsubsection.2.3.6}
